@@ -26,8 +26,8 @@ class Node:
         self.incoming_data: int = 0
         self.data: int = data
         self.connections: List[Node] = []
-        self.x = random.randint(0,100)
-        self.y = random.randint(0,100)
+        self.x: int = random.randint(0,100)
+        self.y: int = random.randint(0,100)
 
     # Add a connection to this node
     def add_connection(self, connection: 'Node'):
@@ -65,13 +65,13 @@ class NodeMesh:
         return self.nodes
     
     def __repr__(self):
-        node_data = [node.data for node in self.nodes]
+        node_data: List[int] = [node.data for node in self.nodes]
         return str(node_data)
 
 class Simulation:
     def __init__(self, node_mesh: NodeMesh):
-        self.node_mesh = node_mesh
-        self.history = [copy.deepcopy(self.node_mesh)]
+        self.node_mesh: NodeMesh = node_mesh
+        self.history: List[NodeMesh] = [copy.deepcopy(self.node_mesh)]
 
     def run(self, steps: int):
         for _ in range(steps):

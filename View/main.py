@@ -1,6 +1,6 @@
 import pyxel
 
-from Model.main import Model
+from Model.main import *
 
 class View:
     def __init__(self):
@@ -15,7 +15,7 @@ class View:
     def render(self, model: Model):
         pyxel.cls(7)
 
-        mesh = model.get_mesh()
+        mesh: NodeMesh = model.get_mesh()
 
         for node in mesh.get_nodes():
             pyxel.rect(node.x, node.y, 10,10,0)
