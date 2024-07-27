@@ -49,7 +49,7 @@ class ClickManager:
         print(f"Selected node: {clicked_node.data}")
 
     def create_connection(self, clicked_node: Node) -> None:
-        self.last_clicked_node.add_connection(clicked_node)
+        self.last_clicked_node.manage_connection_request(clicked_node)
         print(f"Connected {self.last_clicked_node.data} to {clicked_node.data}")
 
     def exit_connecting_mode(self, nodes: List[Node]) -> None:

@@ -16,8 +16,24 @@ class Node:
     def add_connection(self, connection: 'Node') -> None:
         if connection in self.connections:
             return
+        elif self in connection.connections:
+            return
         else:
             self.connections.append(connection)
+
+    def manage_connection_request(self, connection: 'Node'):
+        # if we are already connected to this node, remove that node
+        if connection in self.connections:
+            self.connections.remove(connection)
+            return
+
+        # if it is already connected to ME, then remove the other node from it's connection and add it to mine.
+        if self in connection.connections:
+            connection.remove_connection(self)
+        self.add_connection(connection)
+
+    def remove_connection(self, connection: 'Node') -> None:
+        self.connections.remove(connection)
     
     def receive(self, incoming_data: int) -> None:
         self.incoming_data = incoming_data
