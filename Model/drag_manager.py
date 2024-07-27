@@ -10,7 +10,7 @@ class DragManager:
         self.drag_offset_y: int = 0
         self.dragged_node: Union[int, None] = None
 
-    def handle_drag(self, mouse_x: int, mouse_y: int, is_mouse_down: bool, nodes: List[Node]):
+    def handle_drag(self, mouse_x: int, mouse_y: int, is_mouse_down: bool, nodes: List[Node]) -> None:
         if is_mouse_down:
             if not self.dragging:
                 self.start_drag(mouse_x, mouse_y, nodes)
@@ -20,29 +20,22 @@ class DragManager:
             if self.dragging:
                 self.end_drag()
 
-    def start_drag(self, mouse_x: int, mouse_y: int, nodes: List[Node]):
+    def start_drag(self, mouse_x: int, mouse_y: int, nodes: List[Node]) -> None:
         self.dragging = False
         self.dragged_node = None
         for node in nodes:
-            if self.is_mouse_over_node(mouse_x, mouse_y, node):
+            if node.is_mouse_over(mouse_x, mouse_y):
                 self.dragging = True
                 self.dragged_node = node
                 self.drag_offset_x = node.x - mouse_x
                 self.drag_offset_y = node.y - mouse_y
                 break  # Only drag the first node we find
 
-    def continue_drag(self, mouse_x: int, mouse_y: int):
+    def continue_drag(self, mouse_x: int, mouse_y: int) -> None:
         if self.dragging and self.dragged_node:
             self.dragged_node.x = mouse_x + self.drag_offset_x
             self.dragged_node.y = mouse_y + self.drag_offset_y
 
-    def end_drag(self):
+    def end_drag(self) -> None:
         self.dragging = False
         self.dragged_node = None
-
-    @staticmethod
-    def is_mouse_over_node(mouse_x: int, mouse_y: int, node: 'Node') -> bool:
-        # Calculate the distance between the mouse and the center of the node
-        distance = math.sqrt((mouse_x - node.x)**2 + (mouse_y - node.y)**2)
-        # Check if the distance is less than or equal to the radius
-        return distance <= node.size

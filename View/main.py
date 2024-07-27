@@ -20,9 +20,15 @@ class View:
         # Render Node Connections with Arrows
         for node in nodes:
             for connected_node in node.connections:
-                draw_arrow(node, connected_node, 0)
+                draw_arrow(node.x, node.y, connected_node.x, connected_node.y, 0, node.size)
         
         # Render nodes
         for node in nodes:
             pyxel.circ(node.x, node.y, node.size, 0)
             pyxel.text(node.x, node.y, str(node.data), 7)
+
+            if node.is_selected:
+                # circle outline
+                pyxel.circb(node.x, node.y, node.size, 6)
+                # Arrow to cursor
+                draw_arrow(node.x, node.y, pyxel.mouse_x, pyxel.mouse_y, 5, node.size)

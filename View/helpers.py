@@ -1,17 +1,16 @@
 from math import atan2, cos, sin, pi, sqrt
 import pyxel
-from Model.main import Node
 
-def draw_arrow(node1: Node, node2: Node, color: int):
+def draw_arrow(x1: float, y1: float, x2: float, y2: float, color: int, node_size: float = 3):
     # Calculate the angle of the line
-    angle = atan2(node2.y - node1.y, node2.x - node1.x)
+    angle = atan2(y2 - y1, x2 - x1)
 
     # Calculate the start point of the arrow (end of the line)
-    x2_adj = node2.x - node2.size * cos(angle)
-    y2_adj = node2.y - node2.size * sin(angle)
+    x2_adj = x2 - node_size * cos(angle)
+    y2_adj = y2 - node_size * sin(angle)
 
     # Draw the line
-    pyxel.line(node1.x, node1.y, x2_adj, y2_adj, color)
+    pyxel.line(x1, y1, x2_adj, y2_adj, color)
 
     # Length of the arrowhead lines
     arrow_length = 5
