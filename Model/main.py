@@ -7,22 +7,24 @@ class Model:
         n0 = Node(1)
         n1 = Node(0)
         n2 = Node(1)
-        n3 = Node(0)
 
         n0.add_connection(n1)
         n1.add_connection(n2)
-        n2.add_connection(n3)
 
-        self.node_mesh = NodeMesh([n0, n1, n2, n3])
+        self.node_mesh = NodeMesh([n0, n1, n2])
     def update(self):
         pass
 
     def get_mesh(self):
         return self.node_mesh
+    
+    def step(self):
+        self.node_mesh.step()
 
 
 class Node:
     def __init__(self, data: int = 0):
+        self.size = 6
         self.incoming_data: int = 0
         self.data: int = data
         self.connections: List[Node] = []

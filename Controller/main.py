@@ -21,5 +21,8 @@ class Controller:
         is_mouse_down = pyxel.btn(pyxel.MOUSE_BUTTON_LEFT)
         self.drag_manager.handle_drag(mouse_x, mouse_y, is_mouse_down)
 
+        if pyxel.btnp(pyxel.KEY_RETURN):
+            self.model.step()
+
     def draw(self):
         self.view.render(self.model)
