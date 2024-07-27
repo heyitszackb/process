@@ -23,7 +23,7 @@ class DragManager:
     def start_drag(self, mouse_x: int, mouse_y: int):
         self.dragging = False
         self.dragged_node = None
-        for node in self.model.get_mesh().get_nodes():
+        for node in self.model.get_nodes():
             if self.is_mouse_over_node(mouse_x, mouse_y, node):
                 self.dragging = True
                 self.dragged_node = node

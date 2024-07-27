@@ -20,6 +20,9 @@ class Model:
     
     def step(self):
         self.node_mesh.step()
+    
+    def get_nodes(self):
+        return self.node_mesh.get_nodes()
 
 
 class Node:
