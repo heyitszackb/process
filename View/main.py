@@ -17,5 +17,11 @@ class View:
 
         mesh: NodeMesh = model.get_mesh()
 
+        # Render nodes
         for node in mesh.get_nodes():
-            pyxel.rect(node.x, node.y, 10,10,0)
+            pyxel.circ(node.x, node.y, 5,0)
+        
+        # Render Node Connections
+        for node in mesh.get_nodes():
+            for connected_node in node.connections:
+                pyxel.line(node.x, node.y, connected_node.x, connected_node.y,0)

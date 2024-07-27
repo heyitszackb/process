@@ -1,5 +1,6 @@
 from Model.main import *
 from typing import Union
+import math
 
 class DragManager:
     def __init__(self, model: Model):
@@ -40,6 +41,8 @@ class DragManager:
         self.dragged_node = None
 
     @staticmethod
-    def is_mouse_over_node(mouse_x: int, mouse_y: int, node: Node):
-        return (node.x <= mouse_x <= node.x + 10 and
-                node.y <= mouse_y <= node.y + 10)
+    def is_mouse_over_node(mouse_x: int, mouse_y: int, node: 'Node', radius: int = 5) -> bool:
+        # Calculate the distance between the mouse and the center of the node
+        distance = math.sqrt((mouse_x - node.x)**2 + (mouse_y - node.y)**2)
+        # Check if the distance is less than or equal to the radius
+        return distance <= radius
