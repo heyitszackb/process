@@ -3,16 +3,16 @@ from Model.main import *
 from .helpers import draw_arrow
 
 class View:
-    def __init__(self):
+    def __init__(self) -> None:
         pyxel.init(100, 100, fps=100)
         pyxel.load("../joy.pyxres")
         pyxel.mouse(visible=True)
 
     # For future animation
-    def update(self):
+    def update(self) -> None:
         pass
 
-    def render(self, model: Model):
+    def render(self, model: Model) -> None:
         pyxel.cls(7)
 
         nodes = model.get_nodes()

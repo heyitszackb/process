@@ -1,29 +1,29 @@
 from Model.main import *
-from typing import Union
+from typing import Union, List
 import math
+from .node import Node
 
 class DragManager:
-    def __init__(self, model: Model):
-        self.model: Model = model
+    def __init__(self):
         self.dragging: bool = False
         self.drag_offset_x: int = 0
         self.drag_offset_y: int = 0
         self.dragged_node: Union[int, None] = None
 
-    def handle_drag(self, mouse_x: int, mouse_y: int, is_mouse_down: bool):
+    def handle_drag(self, mouse_x: int, mouse_y: int, is_mouse_down: bool, nodes: List[Node]):
         if is_mouse_down:
             if not self.dragging:
-                self.start_drag(mouse_x, mouse_y)
+                self.start_drag(mouse_x, mouse_y, nodes)
             else:
                 self.continue_drag(mouse_x, mouse_y)
         else:
             if self.dragging:
                 self.end_drag()
 
-    def start_drag(self, mouse_x: int, mouse_y: int):
+    def start_drag(self, mouse_x: int, mouse_y: int, nodes: List[Node]):
         self.dragging = False
         self.dragged_node = None
-        for node in self.model.get_nodes():
+        for node in nodes:
             if self.is_mouse_over_node(mouse_x, mouse_y, node):
                 self.dragging = True
                 self.dragged_node = node
