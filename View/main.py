@@ -4,7 +4,7 @@ from .helpers import draw_arrow
 
 class View:
     def __init__(self) -> None:
-        pyxel.init(100, 100, fps=100)
+        pyxel.init(200, 200, fps=100)
         pyxel.load("../joy.pyxres")
         pyxel.mouse(visible=True)
 
